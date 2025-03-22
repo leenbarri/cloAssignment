@@ -1,0 +1,26 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Urgent News</title>
+</head>
+<body>
+    <h1>Urgent News</h1>
+    <div id="news-container"></div>
+    <script>
+        fetch('http://backend:5000/getUrgentNews')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                data.forEach(article => {
+                    const articleDiv = document.createElement('div');
+                    articleDiv.innerHTML = `<h2>${article.title}</h2><p>${article.content}</p>`;
+                    container.appendChild(articleDiv);
+                });
+            });
+    </script>
+</body>
+</html>
